@@ -48,15 +48,17 @@ Public Class Form1
         Dim newPunches As New List(Of Punch)
         If sl.Count = 0 Then Return newPunches
         For Each s As String In sl
-            Dim myName As String = ""
-            Dim myConnection As String = ""
-            Dim sp As String() = s.Split("=")
-            myName = sp(0)
-            myConnection = sp(1)
-            Dim thisPunch As New Punch
-            thisPunch.Name = myName
-            thisPunch.ConnectionString = myConnection
-            newPunches.Add(thisPunch)
+            If s IsNot Nothing Then
+                Dim myName As String = ""
+                Dim myConnection As String = ""
+                Dim sp As String() = s.Split("=")
+                myName = sp(0)
+                myConnection = sp(1)
+                Dim thisPunch As New Punch
+                thisPunch.Name = myName
+                thisPunch.ConnectionString = myConnection
+                newPunches.Add(thisPunch)
+            End If
         Next
         Return newPunches
     End Function
