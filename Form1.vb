@@ -248,6 +248,9 @@ Public Class Form1
         Using ofd As New OpenFileDialog
             ofd.Filter = "JCL Files (*.jcl)|*.jcl|Text Files (*.txt)|*.txt"
             If ofd.ShowDialog = DialogResult.OK Then
+                ' Set current directory to the file's folder
+                Environment.CurrentDirectory = Path.GetDirectoryName(ofd.FileName)
+
                 Dim lines = File.ReadAllLines(ofd.FileName).ToList
                 cardDeck = lines.Select(Function(l) l).ToList
                 currentIndex = 0
@@ -263,6 +266,7 @@ Public Class Form1
             End If
         End Using
     End Sub
+
 
     Private Sub txtCard_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtCard.KeyPress
         Dim thisKey As Char = e.KeyChar
@@ -362,6 +366,102 @@ Public Class Form1
         btnNext.PerformClick()
     End Sub
 
+    Private Function ProcessDeck(inDeck As List(Of String)) As List(Of String)
+        Dim outDeck As New List(Of String)
+
+        For Each line As String In inDeck
+            Dim trimmedLine As String = line.Trim()
+
+            If trimmedLine.StartsWith("#include ", StringComparison.OrdinalIgnoreCase) Then
+                Dim includePath As String = trimmedLine.Substring(9).Trim()
+
+                If File.Exists(includePath) Then
+                    Try
+                        Dim includedLines As List(Of String) =
+                        ProcessDeck(File.ReadAllLines(includePath).ToList())
+
+                        outDeck.AddRange(includedLines)
+                    Catch ex As Exception
+                        Debug.WriteLine($"Error including file '{includePath}': {ex.Message}")
+                    End Try
+                Else
+                    Debug.WriteLine($"Include file not found: {includePath}")
+                    ' Optionally: outDeck.Add(line)
+                End If
+            Else
+                outDeck.Add(line)
+            End If
+        Next
+
+        Return outDeck
+    End Function
+
+    Private Function ShowProcessedDeck(processedDeck As List(Of String)) As DialogResult
+        Dim outputForm As New Form With {
+        .Text = "Processed Deck Output",
+        .Width = 800,
+        .Height = 600,
+        .StartPosition = FormStartPosition.CenterParent,
+        .FormBorderStyle = FormBorderStyle.FixedDialog,
+        .MinimizeBox = False,
+        .MaximizeBox = False
+    }
+
+        ' Output TextBox
+        Dim txtOutput As New TextBox With {
+        .Multiline = True,
+        .ScrollBars = ScrollBars.Both,
+        .Dock = DockStyle.Fill,
+        .Font = New Font("Consolas", 10),
+        .ReadOnly = True,
+        .WordWrap = False
+    }
+        txtOutput.Lines = processedDeck.ToArray()
+
+        ' Button panel
+        Dim buttonPanel As New Panel With {
+        .Dock = DockStyle.Bottom,
+        .Height = 50
+    }
+
+        ' Submit Button
+        Dim btnSubmit As New Button With {
+        .Text = "Submit",
+        .DialogResult = DialogResult.OK,
+        .Width = 100,
+        .Height = 30,
+        .Top = 10,
+        .Left = 560
+    }
+
+        ' Cancel Button
+        Dim btnCancel As New Button With {
+        .Text = "Cancel",
+        .DialogResult = DialogResult.Cancel,
+        .Width = 100,
+        .Height = 30,
+        .Top = 10,
+        .Left = 670
+    }
+
+        ' Add buttons to panel
+        buttonPanel.Controls.Add(btnSubmit)
+        buttonPanel.Controls.Add(btnCancel)
+
+        ' Add controls to form
+        outputForm.Controls.Add(txtOutput)
+        outputForm.Controls.Add(buttonPanel)
+
+        ' Default buttons
+        outputForm.AcceptButton = btnSubmit
+        outputForm.CancelButton = btnCancel
+
+        Return outputForm.ShowDialog(Me)
+    End Function
+
+
+
+
     Private Sub submitButton_Click(sender As Object, e As EventArgs) Handles submitButton.Click
         If cardDeck.Count = 1 Then
             If cardDeck.Item(0).Trim = "" Then
@@ -369,12 +469,18 @@ Public Class Form1
                 Exit Sub
             End If
         End If
-        Dim thisDevice As String = deviceSelect.Text
-        Dim devList As IEnumerable(Of Reader)
-        devList = (From r As Reader In ReaderList Where r.Name.Trim = thisDevice.Trim Select r)
-        Dim thisReader = devList.FirstOrDefault
-        thisReader.Submit(cardDeck)
-        MsgBox($"Deck sent to reader.", MsgBoxStyle.OkOnly Or MsgBoxStyle.Information, "Submit")
+        Dim outDeck As List(Of String) = ProcessDeck(cardDeck)
+        Dim okToRun As DialogResult = ShowProcessedDeck(outDeck)
+        If okToRun = DialogResult.Yes Then
+            Dim thisDevice As String = deviceSelect.Text
+            Dim devList As IEnumerable(Of Reader)
+            devList = (From r As Reader In ReaderList Where r.Name.Trim = thisDevice.Trim Select r)
+            Dim thisReader = devList.FirstOrDefault
+            thisReader.Submit(outDeck)
+            MsgBox($"Deck sent to reader.", MsgBoxStyle.OkOnly Or MsgBoxStyle.Information, "Submit")
+        Else
+            MsgBox($"Submit cancelled.", MsgBoxStyle.OkOnly Or MsgBoxStyle.Critical, "Cancel job")
+        End If
     End Sub
 
     Private Sub btnFirst_Click(sender As Object, e As EventArgs) Handles btnFirst.Click
