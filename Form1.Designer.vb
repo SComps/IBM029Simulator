@@ -33,6 +33,8 @@ Partial Class Form1
         btnNew = New ToolStripMenuItem()
         btnOpen = New ToolStripMenuItem()
         ToolStripMenuItem1 = New ToolStripSeparator()
+        ToolStripMenuItem3 = New ToolStripMenuItem()
+        ToolStripSeparator3 = New ToolStripSeparator()
         btnSave = New ToolStripMenuItem()
         btnSaveAs = New ToolStripMenuItem()
         ToolStripMenuItem2 = New ToolStripSeparator()
@@ -64,19 +66,20 @@ Partial Class Form1
         txtCard.AcceptsTab = True
         txtCard.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
         txtCard.Font = New Font("Consolas", 12F)
-        txtCard.Location = New Point(12, 512)
+        txtCard.Location = New Point(14, 683)
+        txtCard.Margin = New Padding(3, 4, 3, 4)
         txtCard.MaxLength = 80
         txtCard.Multiline = True
         txtCard.Name = "txtCard"
-        txtCard.Size = New Size(810, 26)
+        txtCard.Size = New Size(925, 33)
         txtCard.TabIndex = 0
         ' 
         ' lblStatus
         ' 
         lblStatus.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
-        lblStatus.Location = New Point(12, 545)
+        lblStatus.Location = New Point(14, 727)
         lblStatus.Name = "lblStatus"
-        lblStatus.Size = New Size(960, 23)
+        lblStatus.Size = New Size(1097, 31)
         lblStatus.TabIndex = 1
         lblStatus.Text = "Card 1 / 1"
         ' 
@@ -85,9 +88,10 @@ Partial Class Form1
         ListBox1.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         ListBox1.Font = New Font("OCR A Extended", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         ListBox1.FormattingEnabled = True
-        ListBox1.Location = New Point(12, 71)
+        ListBox1.Location = New Point(14, 95)
+        ListBox1.Margin = New Padding(3, 4, 3, 4)
         ListBox1.Name = "ListBox1"
-        ListBox1.Size = New Size(808, 429)
+        ListBox1.Size = New Size(923, 556)
         ListBox1.TabIndex = 11
         ' 
         ' sysTimer
@@ -99,100 +103,115 @@ Partial Class Form1
         capslock.AutoSize = True
         capslock.Checked = True
         capslock.CheckState = CheckState.Checked
-        capslock.Location = New Point(737, 545)
+        capslock.Location = New Point(842, 728)
+        capslock.Margin = New Padding(3, 4, 3, 4)
         capslock.Name = "capslock"
-        capslock.Size = New Size(83, 19)
+        capslock.Size = New Size(100, 24)
         capslock.TabIndex = 13
         capslock.Text = "CAPS Lock"
         capslock.UseVisualStyleBackColor = True
         ' 
         ' MenuStrip1
         ' 
+        MenuStrip1.ImageScalingSize = New Size(20, 20)
         MenuStrip1.Items.AddRange(New ToolStripItem() {DeckToolStripMenuItem, DevicesToolStripMenuItem, AboutToolStripMenuItem})
         MenuStrip1.Location = New Point(0, 0)
         MenuStrip1.Name = "MenuStrip1"
-        MenuStrip1.Size = New Size(836, 24)
+        MenuStrip1.Padding = New Padding(7, 3, 0, 3)
+        MenuStrip1.Size = New Size(955, 30)
         MenuStrip1.TabIndex = 14
         MenuStrip1.Text = "MenuStrip1"
         ' 
         ' DeckToolStripMenuItem
         ' 
-        DeckToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {btnNew, btnOpen, ToolStripMenuItem1, btnSave, btnSaveAs, ToolStripMenuItem2, ExitToolStripMenuItem})
+        DeckToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {btnNew, btnOpen, ToolStripMenuItem1, ToolStripMenuItem3, ToolStripSeparator3, btnSave, btnSaveAs, ToolStripMenuItem2, ExitToolStripMenuItem})
         DeckToolStripMenuItem.Name = "DeckToolStripMenuItem"
-        DeckToolStripMenuItem.Size = New Size(45, 20)
+        DeckToolStripMenuItem.Size = New Size(56, 24)
         DeckToolStripMenuItem.Text = "Deck"
         ' 
         ' btnNew
         ' 
         btnNew.Name = "btnNew"
-        btnNew.Size = New Size(123, 22)
+        btnNew.Size = New Size(224, 26)
         btnNew.Text = "New"
         ' 
         ' btnOpen
         ' 
         btnOpen.Name = "btnOpen"
-        btnOpen.Size = New Size(123, 22)
+        btnOpen.Size = New Size(224, 26)
         btnOpen.Text = "Open"
         ' 
         ' ToolStripMenuItem1
         ' 
         ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        ToolStripMenuItem1.Size = New Size(120, 6)
+        ToolStripMenuItem1.Size = New Size(221, 6)
+        ' 
+        ' ToolStripMenuItem3
+        ' 
+        ToolStripMenuItem3.Name = "ToolStripMenuItem3"
+        ToolStripMenuItem3.Size = New Size(224, 26)
+        ToolStripMenuItem3.Text = "Include File"
+        ' 
+        ' ToolStripSeparator3
+        ' 
+        ToolStripSeparator3.Name = "ToolStripSeparator3"
+        ToolStripSeparator3.Size = New Size(221, 6)
         ' 
         ' btnSave
         ' 
         btnSave.Name = "btnSave"
-        btnSave.Size = New Size(123, 22)
+        btnSave.Size = New Size(224, 26)
         btnSave.Text = "Save"
         ' 
         ' btnSaveAs
         ' 
         btnSaveAs.Name = "btnSaveAs"
-        btnSaveAs.Size = New Size(123, 22)
+        btnSaveAs.Size = New Size(224, 26)
         btnSaveAs.Text = "Save As..."
         ' 
         ' ToolStripMenuItem2
         ' 
         ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        ToolStripMenuItem2.Size = New Size(120, 6)
+        ToolStripMenuItem2.Size = New Size(221, 6)
         ' 
         ' ExitToolStripMenuItem
         ' 
         ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        ExitToolStripMenuItem.Size = New Size(123, 22)
+        ExitToolStripMenuItem.Size = New Size(224, 26)
         ExitToolStripMenuItem.Text = "Exit"
         ' 
         ' DevicesToolStripMenuItem
         ' 
         DevicesToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {ReadersToolStripMenuItem, PunchesToolStripMenuItem})
         DevicesToolStripMenuItem.Name = "DevicesToolStripMenuItem"
-        DevicesToolStripMenuItem.Size = New Size(59, 20)
+        DevicesToolStripMenuItem.Size = New Size(74, 24)
         DevicesToolStripMenuItem.Text = "Devices"
         ' 
         ' ReadersToolStripMenuItem
         ' 
         ReadersToolStripMenuItem.Name = "ReadersToolStripMenuItem"
-        ReadersToolStripMenuItem.Size = New Size(180, 22)
+        ReadersToolStripMenuItem.Size = New Size(145, 26)
         ReadersToolStripMenuItem.Text = "Readers"
         ' 
         ' PunchesToolStripMenuItem
         ' 
         PunchesToolStripMenuItem.Name = "PunchesToolStripMenuItem"
-        PunchesToolStripMenuItem.Size = New Size(180, 22)
+        PunchesToolStripMenuItem.Size = New Size(145, 26)
         PunchesToolStripMenuItem.Text = "Punches"
         ' 
         ' AboutToolStripMenuItem
         ' 
         AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        AboutToolStripMenuItem.Size = New Size(52, 20)
+        AboutToolStripMenuItem.Size = New Size(64, 24)
         AboutToolStripMenuItem.Text = "About"
         ' 
         ' ToolStrip1
         ' 
+        ToolStrip1.ImageScalingSize = New Size(20, 20)
         ToolStrip1.Items.AddRange(New ToolStripItem() {btnFirst, btnPrev, ToolStripSeparator1, btnNext, btnLast, ToolStripSeparator2, btnInsert, btnDelete, btnDup, posDisplay, submitButton, deviceSelect})
-        ToolStrip1.Location = New Point(0, 24)
+        ToolStrip1.Location = New Point(0, 30)
         ToolStrip1.Name = "ToolStrip1"
-        ToolStrip1.Size = New Size(836, 38)
+        ToolStrip1.Size = New Size(955, 47)
         ToolStrip1.TabIndex = 15
         ToolStrip1.Text = "ToolStrip1"
         ' 
@@ -201,7 +220,7 @@ Partial Class Form1
         btnFirst.Image = My.Resources.Resources.GoToFirst
         btnFirst.ImageTransparentColor = Color.Magenta
         btnFirst.Name = "btnFirst"
-        btnFirst.Size = New Size(33, 35)
+        btnFirst.Size = New Size(40, 44)
         btnFirst.Text = "First"
         btnFirst.TextImageRelation = TextImageRelation.ImageAboveText
         ' 
@@ -210,21 +229,21 @@ Partial Class Form1
         btnPrev.Image = My.Resources.Resources.GoToPrevious
         btnPrev.ImageTransparentColor = Color.Magenta
         btnPrev.Name = "btnPrev"
-        btnPrev.Size = New Size(34, 35)
+        btnPrev.Size = New Size(41, 44)
         btnPrev.Text = "Prev"
         btnPrev.TextImageRelation = TextImageRelation.ImageAboveText
         ' 
         ' ToolStripSeparator1
         ' 
         ToolStripSeparator1.Name = "ToolStripSeparator1"
-        ToolStripSeparator1.Size = New Size(6, 38)
+        ToolStripSeparator1.Size = New Size(6, 47)
         ' 
         ' btnNext
         ' 
         btnNext.Image = My.Resources.Resources.GoToNext
         btnNext.ImageTransparentColor = Color.Magenta
         btnNext.Name = "btnNext"
-        btnNext.Size = New Size(36, 35)
+        btnNext.Size = New Size(44, 44)
         btnNext.Text = "Next"
         btnNext.TextImageRelation = TextImageRelation.ImageAboveText
         ' 
@@ -233,21 +252,21 @@ Partial Class Form1
         btnLast.Image = My.Resources.Resources.GoToLast
         btnLast.ImageTransparentColor = Color.Magenta
         btnLast.Name = "btnLast"
-        btnLast.Size = New Size(32, 35)
+        btnLast.Size = New Size(39, 44)
         btnLast.Text = "Last"
         btnLast.TextImageRelation = TextImageRelation.ImageAboveText
         ' 
         ' ToolStripSeparator2
         ' 
         ToolStripSeparator2.Name = "ToolStripSeparator2"
-        ToolStripSeparator2.Size = New Size(6, 38)
+        ToolStripSeparator2.Size = New Size(6, 47)
         ' 
         ' btnInsert
         ' 
         btnInsert.Image = My.Resources.Resources.InsertMark
         btnInsert.ImageTransparentColor = Color.Magenta
         btnInsert.Name = "btnInsert"
-        btnInsert.Size = New Size(40, 35)
+        btnInsert.Size = New Size(49, 44)
         btnInsert.Text = "Insert"
         btnInsert.TextImageRelation = TextImageRelation.ImageAboveText
         ' 
@@ -256,7 +275,7 @@ Partial Class Form1
         btnDelete.Image = My.Resources.Resources.Delete
         btnDelete.ImageTransparentColor = Color.Magenta
         btnDelete.Name = "btnDelete"
-        btnDelete.Size = New Size(44, 35)
+        btnDelete.Size = New Size(57, 44)
         btnDelete.Text = "Delete"
         btnDelete.TextImageRelation = TextImageRelation.ImageAboveText
         ' 
@@ -265,7 +284,7 @@ Partial Class Form1
         btnDup.Image = My.Resources.Resources.Duplicate
         btnDup.ImageTransparentColor = Color.Magenta
         btnDup.Name = "btnDup"
-        btnDup.Size = New Size(33, 35)
+        btnDup.Size = New Size(41, 44)
         btnDup.Text = "Dup"
         btnDup.TextImageRelation = TextImageRelation.ImageAboveText
         ' 
@@ -291,7 +310,7 @@ Partial Class Form1
         submitButton.Image = My.Resources.Resources.Send
         submitButton.ImageTransparentColor = Color.Magenta
         submitButton.Name = "submitButton"
-        submitButton.Size = New Size(49, 35)
+        submitButton.Size = New Size(60, 44)
         submitButton.Text = "Submit"
         submitButton.TextImageRelation = TextImageRelation.ImageAboveText
         ' 
@@ -299,14 +318,15 @@ Partial Class Form1
         ' 
         deviceSelect.Alignment = ToolStripItemAlignment.Right
         deviceSelect.Name = "deviceSelect"
-        deviceSelect.Size = New Size(141, 38)
+        deviceSelect.Size = New Size(161, 47)
         deviceSelect.Text = "No device selected"
         ' 
         ' FakeButton
         ' 
-        FakeButton.Location = New Point(20, 79)
+        FakeButton.Location = New Point(23, 105)
+        FakeButton.Margin = New Padding(3, 4, 3, 4)
         FakeButton.Name = "FakeButton"
-        FakeButton.Size = New Size(75, 23)
+        FakeButton.Size = New Size(86, 31)
         FakeButton.TabIndex = 16
         FakeButton.Text = "Button1"
         FakeButton.UseVisualStyleBackColor = True
@@ -314,9 +334,9 @@ Partial Class Form1
         ' Form1
         ' 
         AcceptButton = FakeButton
-        AutoScaleDimensions = New SizeF(7F, 15F)
+        AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(836, 569)
+        ClientSize = New Size(955, 759)
         Controls.Add(ToolStrip1)
         Controls.Add(capslock)
         Controls.Add(ListBox1)
@@ -325,6 +345,7 @@ Partial Class Form1
         Controls.Add(MenuStrip1)
         Controls.Add(FakeButton)
         MainMenuStrip = MenuStrip1
+        Margin = New Padding(3, 4, 3, 4)
         Name = "Form1"
         StartPosition = FormStartPosition.CenterScreen
         Text = "IBM 029 Simulator"
@@ -368,6 +389,8 @@ Partial Class Form1
     Friend WithEvents submitButton As ToolStripButton
     Friend WithEvents deviceSelect As ToolStripComboBox
     Friend WithEvents FakeButton As Button
+    Friend WithEvents ToolStripMenuItem3 As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
 
 
 End Class

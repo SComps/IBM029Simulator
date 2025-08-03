@@ -5,6 +5,7 @@ Imports System.IO
 Imports System.Net.NetworkInformation
 Imports System.Runtime.CompilerServices
 Imports System.Runtime.Serialization
+Imports System.Security.Policy
 Imports System.Text.RegularExpressions
 Imports System.Threading
 
@@ -460,8 +461,6 @@ Public Class Form1
     End Function
 
 
-
-
     Private Sub submitButton_Click(sender As Object, e As EventArgs) Handles submitButton.Click
         If cardDeck.Count = 1 Then
             If cardDeck.Item(0).Trim = "" Then
@@ -508,6 +507,28 @@ Public Class Form1
         ActivatePunches()
 
     End Sub
+
+    Private Sub ToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem3.Click
+        If txtCard.Text.Trim <> "" Then
+            ' The card is not blank.
+            Dim repl As New DialogResult
+            repl = MsgBox("This card is not empty.  Do you want to replace it with the include directive?",
+                        MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "Include")
+            If repl = DialogResult.No Then Exit Sub
+        End If
+        Dim ib As New includeBrowse
+        ib.ShowDialog()
+        If ib.DialogResult = DialogResult.OK Then
+            If ib.FileBrowserControl1.SelectedFile.Trim = "" Then
+                MsgBox($"No file chosen")
+            Else
+                MsgBox($"File {ib.FileBrowserControl1.SelectedFile}")
+            End If
+        End If
+        txtCard.Text = $"#INCLUDE {ib.SelectedFile}"
+    End Sub
+
+
 End Class
 
 Public Class TabAwareTextBox
