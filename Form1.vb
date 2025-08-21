@@ -470,7 +470,7 @@ Public Class Form1
         End If
         Dim outDeck As List(Of String) = ProcessDeck(cardDeck)
         Dim okToRun As DialogResult = ShowProcessedDeck(outDeck)
-        If okToRun = DialogResult.Yes Then
+        If okToRun = DialogResult.OK Then
             Dim thisDevice As String = deviceSelect.Text
             Dim devList As IEnumerable(Of Reader)
             devList = (From r As Reader In ReaderList Where r.Name.Trim = thisDevice.Trim Select r)
